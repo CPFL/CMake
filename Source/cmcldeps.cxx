@@ -265,7 +265,7 @@ int main() {
 
   std::string nol = " /nologo ";
   std::string show = " /showIncludes ";
-  if (lang == "C" || lang == "CXX") {
+  if (lang == "C" || lang == "CXX" || lang == "CUDA") {
     return process(srcfilename, dfile, objfile, prefix,
                    binpath + nol + show + rest);
   } else if (lang == "RC") {

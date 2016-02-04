@@ -149,7 +149,7 @@ void cmNinjaTargetGenerator::AddIncludeFlags(std::string& languageFlags,
 
 bool cmNinjaTargetGenerator::NeedDepTypeMSVC(const std::string& lang) const
 {
-  if (lang == "C" || lang == "CXX")
+  if (lang == "C" || lang == "CXX" || lang == "CUDA")
     {
     cmMakefile* mf = this->GetMakefile();
     return (
@@ -408,7 +408,7 @@ cmNinjaTargetGenerator
   cmSystemTools::ExpandListArgument(compileCmd, compileCmds);
 
   // Maybe insert an include-what-you-use runner.
-  if (!compileCmds.empty() && (lang == "C" || lang == "CXX"))
+  if (!compileCmds.empty() && (lang == "C" || lang == "CXX" || lang == "CUDA"))
     {
     std::string const iwyu_prop = lang + "_INCLUDE_WHAT_YOU_USE";
     const char *iwyu = this->Target->GetProperty(iwyu_prop);
@@ -425,7 +425,7 @@ cmNinjaTargetGenerator
     }
 
   // Maybe insert a compiler launcher like ccache or distcc
-  if (!compileCmds.empty() && (lang == "C" || lang == "CXX"))
+  if (!compileCmds.empty() && (lang == "C" || lang == "CXX" || lang == "CUDA"))
     {
     std::string const clauncher_prop = lang + "_COMPILER_LAUNCHER";
     const char *clauncher = this->Target->GetProperty(clauncher_prop);

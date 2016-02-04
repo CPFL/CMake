@@ -621,6 +621,7 @@ cmMakefileTargetGenerator
   // ability to export compile commands
   bool lang_has_preprocessor = ((lang == "C") ||
                                 (lang == "CXX") ||
+                                (lang == "CUDA") ||
                                 (lang == "Fortran"));
   bool const lang_has_assembly = lang_has_preprocessor;
   bool const lang_can_export_cmds = lang_has_preprocessor;
@@ -656,7 +657,7 @@ cmMakefileTargetGenerator
     }
 
   // Maybe insert an include-what-you-use runner.
-  if (!compileCommands.empty() && (lang == "C" || lang == "CXX"))
+  if (!compileCommands.empty() && (lang == "C" || lang == "CXX" || lang == "CUDA"))
     {
     std::string const iwyu_prop = lang + "_INCLUDE_WHAT_YOU_USE";
     const char *iwyu = this->Target->GetProperty(iwyu_prop);
@@ -670,7 +671,7 @@ cmMakefileTargetGenerator
     }
 
   // Maybe insert a compiler launcher like ccache or distcc
-  if (!compileCommands.empty() && (lang == "C" || lang == "CXX"))
+  if (!compileCommands.empty() && (lang == "C" || lang == "CXX" || lang == "CUDA"))
     {
     std::string const clauncher_prop = lang + "_COMPILER_LAUNCHER";
     const char *clauncher = this->Target->GetProperty(clauncher_prop);

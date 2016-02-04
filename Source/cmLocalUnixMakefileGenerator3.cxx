@@ -308,6 +308,7 @@ void cmLocalUnixMakefileGenerator3::WriteLocalMakefile()
       {
       if(ei->Language == "C" ||
          ei->Language == "CXX" ||
+         ei->Language == "CUDA" ||
          ei->Language == "Fortran")
         {
         // Right now, C, C++ and Fortran have both a preprocessor and the
@@ -1656,7 +1657,7 @@ cmLocalUnixMakefileGenerator3
 
     // Create the scanner for this language
     cmDepends *scanner = 0;
-    if(lang == "C" || lang == "CXX" || lang == "RC" || lang == "ASM")
+    if(lang == "C" || lang == "CXX" || lang == "CUDA" || lang == "RC" || lang == "ASM")
       {
       // TODO: Handle RC (resource files) dependencies correctly.
       scanner = new cmDependsC(this, targetDir, lang, &validDeps);
